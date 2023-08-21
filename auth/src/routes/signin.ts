@@ -1,21 +1,23 @@
 import express, { Request, Response } from 'express';
 import { body } from 'express-validator';
 import jwt from 'jsonwebtoken';
+import { validateRequest, BadRequestError } from '@rallycoding/common';
 
 import { Password } from '../services/password';
 import { User } from '../models/user';
-import { validateRequest, BadRequestError } from '@akramsamirticketing/common';
 
 const router = express.Router();
 
 router.post(
   '/api/users/signin',
   [
-    body('email').isEmail().withMessage('Email must be valid'),
+    body('email')
+      .isEmail()
+      .withMessage('Email must be valid'),
     body('password')
       .trim()
       .notEmpty()
-      .withMessage('You must supply a password'),
+      .withMessage('You must supply a password')
   ],
   validateRequest,
   async (req: Request, res: Response) => {
@@ -38,14 +40,14 @@ router.post(
     const userJwt = jwt.sign(
       {
         id: existingUser.id,
-        email: existingUser.email,
+        email: existingUser.email
       },
       process.env.JWT_KEY!
     );
 
     // Store it on session object
     req.session = {
-      jwt: userJwt,
+      jwt: userJwt
     };
 
     res.status(200).send(existingUser);
@@ -53,4 +55,3 @@ router.post(
 );
 
 export { router as signinRouter };
-

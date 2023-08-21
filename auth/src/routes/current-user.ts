@@ -1,5 +1,5 @@
 import express from 'express';
-import { currentUser } from '@akramsamirticketing/common';
+import { currentUser } from '@rallycoding/common';
 
 const router = express.Router();
 
@@ -8,4 +8,3 @@ router.get('/api/users/currentuser', currentUser, (req, res) => {
 });
 
 export { router as currentUserRouter };
-

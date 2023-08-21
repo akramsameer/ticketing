@@ -1,8 +1,8 @@
-import { json } from 'body-parser';
-import cookieSession from 'cookie-session';
 import express from 'express';
 import 'express-async-errors';
-import { errorHandler, NotFoundError } from '@akramsamirticketing/common';
+import { json } from 'body-parser';
+import cookieSession from 'cookie-session';
+import { errorHandler, NotFoundError } from '@rallycoding/common';
 
 import { currentUserRouter } from './routes/current-user';
 import { signinRouter } from './routes/signin';
